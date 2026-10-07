@@ -1,0 +1,7 @@
+Retrieval-augmented generation combines a search system with a language model. The search system finds passages that are relevant to a question. The language model then uses those passages to write an answer.
+
+Language models can only read a limited amount of text at once. Long documents therefore have to be split into smaller pieces before they can be searched. These pieces are called chunks.
+
+A good chunker never cuts a sentence in half. It also measures size in tokens, because tokens are what the model actually reads. Finally, it repeats a little text between neighbouring chunks, so that ideas near a boundary are not lost.
+
+Chunk size and overlap are settings. A larger chunk size keeps more context together but makes search less precise. A smaller chunk size is more precise but may separate related sentences. Overlap reduces that risk at the cost of some repeated text.
