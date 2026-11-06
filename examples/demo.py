@@ -1,5 +1,4 @@
-"""Chunk any supported file and print the results.
-
+"""
 Usage:
     python examples/demo.py path/to/file.pdf --size 200 --overlap 30
 """
@@ -9,6 +8,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
+#Chunk any supported file and print the results.
 
 from chunker import Chunker  # noqa: E402
 
@@ -28,6 +29,25 @@ def main():
         print(f"--- chunk {i} | {chunker.count(chunk)} tokens ---")
         print(chunk, end="\n\n")
 
+    #Creating Emdedding for each chunk and storing them in a vector database is left as an exercise for the reader.
+
+    import ollama
+
+    for i, chunk in enumerate(chunks, start=1):
+        response = ollama.embeddings(
+            model="nomic-embed-text",
+            prompt=chunk
+        )
+
+        embedding = response["embedding"]
+
+        print(f"\n{'='*80}")
+        print(f"Chunk #{i}")
+        print(f"Text: {chunk}")
+        print(f"Embedding Dimension: {len(embedding)}")
+        print(f"First 10 Values: {embedding[:10]}")
+
 
 if __name__ == "__main__":
     main()
+
