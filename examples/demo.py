@@ -6,6 +6,7 @@ Usage:
 import argparse
 import sys
 from pathlib import Path
+import ollama
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
@@ -30,8 +31,6 @@ def main():
         print(chunk, end="\n\n")
 
     #Creating Emdedding for each chunk and storing them in a vector database is left as an exercise for the reader.
-
-    import ollama
 
     for i, chunk in enumerate(chunks, start=1):
         response = ollama.embeddings(
